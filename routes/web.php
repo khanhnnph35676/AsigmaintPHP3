@@ -31,12 +31,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>'checkAdmin'
 
 // -----------------------------user----------------------------------------------------
 
+Route::get('login-user',[AuthenController::class, 'loginUser'])->name('loginUser');
+Route::post('login-user',[AuthenController::class, 'postLoginUser'])->name('postLoginUser');
+
+Route::get('logout-user',[AuthenController::class, 'logoutUser'])->name('logoutUser');
+
 Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
     Route::get('/',function(){
         return view('user.home');
     });
-   Route::post('login-user',[AuthenController::class, 'postLoginUser'])->name('postLoginUser');
-   Route::get('logout-user',[AuthenController::class, 'logoutUser'])->name('logoutUser');
+
 });
 
 

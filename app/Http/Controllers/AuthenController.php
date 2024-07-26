@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use App\Models\Session;
+
 class AuthenController extends Controller
 {
     // đăng nhập
@@ -78,6 +80,9 @@ class AuthenController extends Controller
     }
 
 // Đăng nhập bên mua hàng
+    public function loginUser(){
+        return view('user.login');
+    }
     public function postLoginUser(Request $request){
         $request->validate([
             'email' =>['required', 'email'],
@@ -92,29 +97,26 @@ class AuthenController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
+        $remember = $request->has('remember');
+        $idUser = Auth::id();
+        $minutes = 60; // Thời gian sống của cookie tính bằng phút
 
-        if(Auth::attempt($data)){
-            // hệ thống đăng nhập tranh cho người dùng
-            // role 1 và 2 đều đăng nhập vào được nên không cần if
-            // dd(Auth::id());
-            session()->put('user_id',Auth::id());
-
-            return redirect()->route('user.')->with([
-                "mes"=>"Đăng nhập thành công"
-            ]);
-
+        if(Auth::attempt($data,$remember)){
+            session()->put('mes', 'Đăng nhập thành công');
+            return redirect()->route('user.');
         }else{
+
             return redirect()->back()->with([
-                'mesErr' => 'Bạn đăng nhập sai tài khoản hoặc mật khẩu'
+                'mesErr' =>'Bạn đăng nhập sai tài khoản hoặc mật khẩu'
             ]);
+
         };
     }
 // đăng xuất
     public function logoutUser(){
-        // Session::where('user_id',Auth::id())->delete();
-
-        // return redirect()->route('user.')->with([
-        //     'mesLogout' => 'Đăng xuất thành công'
-        // ]);
+        Auth::logout();
+        return redirect()->route('loginUser')->with([
+            'mesErr' => 'Đăng xuất thành công'
+        ]);
     }
 }

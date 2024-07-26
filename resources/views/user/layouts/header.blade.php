@@ -48,35 +48,42 @@
             <div class="col-3"></div>
             <div class="col-2 d-flex justify-content-around">
                 <i class="pointer fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i>
-                @if (!session()->has('user_id'))
-                    <a href="" data-bs-toggle="modal" data-bs-target="#log">
+                @if (session('mes'))
+                <div class="alert alert-dark alert-dismissible fade show message" role="alert">
+                    {{ session('mes') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    
+                </div>
+                @endif
+
+                <p class="d-inline-flex gap-1">
+                    <a data-bs-toggle="collapse" data-bs-target="#info" aria-expanded="false" aria-controls="info">
                         <i class="pointer fa-regular fa-user fa-lg" style="color: #000000;"></i>
                     </a>
-                    @if (session('mesLogout'))
-                    <div class="alert alert-dark alert-dismissible fade show message" role="alert">
-                            <strong> {{ session('mesLogout') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                </p>
+                <div class="collapse" id="info">
+                    {{-- khi chưa đăng nhập thành công --}}
+                    @if (!session('mes') )
+                        <div class="card card-body p-1 ps-0">
+                            <ul class="p-2">
+                                <li class="mt-3 ms-2 pe-5"><a href="{{ route('loginUser') }}">Đăng nhập
+                                    </a></li>
+                                <li class="mt-3 ms-2 pe-5"><a href="{{ route('logoutUser') }}">
+                                        Đăng ký
+                                    </a></li>
+                            </ul>
+                        </div>
                     @endif
-                @endif
-                @if (session()->has('user_id'))
-                    <div class="alert alert-dark alert-dismissible fade show message" role="alert">
-                        <strong> {{ session('mes') }}</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    <p class="d-inline-flex gap-1">
-                        <a data-bs-toggle="collapse" data-bs-target="#info" aria-expanded="false" aria-controls="info">
-                            <i class="pointer fa-regular fa-user fa-lg" style="color: #000000;"></i>
-                        </a>
-                    </p>
-                    <div class="collapse" id="info">
+
+                    {{-- khi  đăng nhập thành công --}}
+                    @if (session('mes') )
                         <div class="card card-body p-1 ps-0">
                             <ul class="p-2">
                                 <li class="mt-2 pe-5"><a href="">
                                         <div class="wrapper-img-user d-flex gap-1">
                                             <img src="{{ asset('img/prd/sp_3.png') }}" style=" object-fit: cover;"
                                                 class="radius-50" alt="" width="70px" height="70px">
-                                            <h5>Khánh Như</h5>
+                                            <h5> {{session('mes') }}</h5>
                                         </div>
 
                                     </a></li>
@@ -88,15 +95,16 @@
                                             style="color: #000000;"></i></i>
                                         Cài đặt
                                     </a></li>
-                                <li class="mt-3 pe-5"><a href="{{ route('user.logoutUser') }}"><i
+                                <li class="mt-3 pe-5"><a href="{{ route('logoutUser') }}"><i
                                             class="fa-solid fa-right-from-bracket fa-lg me-2"
                                             style="color: #000000;"></i>
                                         Đăng xuất
                                     </a></li>
                             </ul>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
+
                 {{-- khi đăng nhập thành công mới hiện cái dưới --}}
 
                 <i class="pointer fa-regular fa-heart fa-lg" style="color: #000000;"></i>
@@ -130,42 +138,3 @@
         </div>
     </div>
 </div>
-
-<!-- Đăng nhập đăng kí -->
-@if (!session()->has('user_id'))
-    <div class="modal fade" id="log" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="logLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="logLabel">Đăng nhập</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('user.postLoginUser') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="pt-3">
-                            <label for="">Email</label>
-                            <input type="text" name="email" placeholder="Nhập email" class="form-control mt-2">
-                            @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="pt-3">
-                            <label for="">Mật khẩu</label>
-                            <input type="password" name="password" placeholder="Nhập mật khẩu"
-                                class="form-control mt-2">
-                            @error('password')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer mt-4">
-                        <button type="submit" class="btn btn-danger">Đăng nhập</button>
-                        <a href="" class="btn btn">Đăng ký</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endif
