@@ -17,13 +17,20 @@
             <img src="{{asset('img/icon/image 40.png')}}" width="300" height="">
         </div>
     </div>
-    <form action="{{ route('postLoginUser') }}" method="POST" style="width:600px;" id="form-login">
+    <form action="{{ route('postRegisterUser') }}" method="POST" style="width:600px;" id="form-login">
+
         <div class="headline d-flex align-items-center gap-2 justify-content-center mb-4">
-            <h4>Đăng nhập </h4>
+            <h4>Đăng ký </h4>
             <img src="{{asset('img/icon/image 40.png')}}" width="130" height="">
         </div>
-
         @csrf
+        <div class="pt-3">
+            <label for="">Tên tài khoản:</label>
+            <input type="text" name="name" placeholder="Nhập tên" class="form-control mt-2">
+            @error('name')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
         <div class="pt-3">
             <label for="">Email</label>
             <input type="text" name="email" placeholder="Nhập email" class="form-control mt-2">
@@ -38,14 +45,9 @@
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
-        <div class="pt-3">
-
-            <input type="checkbox" name="remember">
-            <label for="">Remember me</label>
-        </div>
         <br>
-        <button type="submit" class="btn btn-danger">Đăng nhập</button>
-        <a href=" {{ route('registerUser') }} " class="btn btn border ms-3">Đăng ký</a>
+        <button type="submit" class="btn btn-danger">Đăng ký</button>
+        <a href="{{ route('loginUser') }}" class="btn btn border ms-3">Đăng nhập</a>
         <br><br>
     @if (session('mesErr'))
         <span class="text-danger"> {{ session('mesErr') }}</span>

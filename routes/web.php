@@ -11,7 +11,6 @@ Route::get('login',[AuthenController::class, 'login'])->name('login');
 Route::post('login',[AuthenController::class, 'postLogin'])->name('postLogin');
 // đăng xuất
 Route::get('logout',[AuthenController::class, 'logout'])->name('logout');
-
 // đăng kí
 Route::get('register',[AuthenController::class, 'register'])->name('register');
 Route::post('register',[AuthenController::class, 'postRegister'])->name('postRegister');
@@ -20,7 +19,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>'checkAdmin'
     Route::get('/',function(){
         return view('admin.home');
     });
-
     Route::group(['prefix' => 'products', 'as' => 'products.'],  function(){
         Route::get('/',[ProductController :: class, 'listProducts'])->name('listProducts');
     });
@@ -33,8 +31,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>'checkAdmin'
 
 Route::get('login-user',[AuthenController::class, 'loginUser'])->name('loginUser');
 Route::post('login-user',[AuthenController::class, 'postLoginUser'])->name('postLoginUser');
-
 Route::get('logout-user',[AuthenController::class, 'logoutUser'])->name('logoutUser');
+
+Route::get('register-user',[AuthenController::class, 'registerUser'])->name('registerUser');
+Route::post('register-user',[AuthenController::class, 'postRegisterUser'])->name('postRegisterUser');
 
 Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
     Route::get('/',function(){

@@ -81,15 +81,15 @@ a{
       transform: rotate(360deg);
     }
   }
-  
+
   /* Áp dụng animation và style khác cho icon */
-  
+
 .install-color {
     cursor: pointer;
     color: #68676a; /* Màu sắc icon */
     animation: spin infinite 3s linear; /* Chạy vô hạn, 3 giây mỗi vòng, tuyến tính */
   }
-  
+
 /* -------------------------Header ---------------------- */
 
 .header{
@@ -197,7 +197,7 @@ a{
 }
 
 .information ul li{
-    display: inline-block; 
+    display: inline-block;
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -220,9 +220,9 @@ a{
    position: fixed;
    background: rgba(0, 0, 0, 0.543);
     overflow-y: auto;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     scrollbar-width: thin; /* Thiết lập độ dày của thanh cuộn */
-    scrollbar-color: #888 #333; 
+    scrollbar-color: #888 #333;
     height:100%;
 }
 
@@ -356,9 +356,9 @@ a{
 .list-prd{
     height: 320px;
     overflow-y: auto;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     scrollbar-width: thin; /* Thiết lập độ dày của thanh cuộn */
-    scrollbar-color: #888 #333; 
+    scrollbar-color: #888 #333;
 }
 
 .list-prd::-webkit-scrollbar {
@@ -425,3 +425,6 @@ a{
     display: flex;
     justify-content: space-around;
 }
+
+/* -----------------------trang dăng nhập-------------------- */
+

@@ -25,10 +25,12 @@ class AuthenController extends Controller
             'email.email' => 'Email không đúng định dạng',
             'password.required' => 'Password không được để trống'
         ]);
-        if(Auth::attempt([
+        $data = [
             'email' => $request->email,
             'password' => $request->password
-        ])){
+        ];
+        $remember = $request->has('remember');
+        if(Auth::attempt($data,$remember)){
             if(Auth::user()->role == '1'){
                 return redirect()->route('admin.');
             }
@@ -51,16 +53,16 @@ class AuthenController extends Controller
     }
     public function postRegister(Request $request){
         $request->validate([
-            'email'=>['required','email'],
-            'password'=> 'required',
-            'name'=>'required',
-        ],
-        [
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'password.required' => 'Password không được để trống',
-            'name.required'=>'Bạn chưa nhập tên'
-        ]);
+                'email'=>['required','email'],
+                'password'=> 'required',
+                'name'=>'required',
+            ],
+            [
+                'email.required' => 'Email không được để trống',
+                'email.email' => 'Email không đúng định dạng',
+                'password.required' => 'Password không được để trống',
+                'name.required'=>'Bạn chưa nhập tên'
+            ]);
         $check = User::where('email', $request->email)->exists();
         if($check){
             return redirect()->back()->with([
@@ -118,5 +120,39 @@ class AuthenController extends Controller
         return redirect()->route('loginUser')->with([
             'mesErr' => 'Đăng xuất thành công'
         ]);
+    }
+// đăng kí
+    public function registerUser(){
+        return view('user.register');
+    }
+    public function postRegisterUser(Request $request){
+        $request->validate([
+            'email'=>['required','email'],
+            'password'=> 'required',
+            'name'=>'required',
+        ],
+        [
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'password.required' => 'Password không được để trống',
+            'name.required'=>'Bạn chưa nhập tên'
+        ]);
+        // check email không được trùng
+        $check = User::where('email', $request->email)->exists();
+        if($check){
+            return redirect()->back()->with([
+                'mesErr' => 'Email đã tồn tại'
+            ]);
+        }else {
+            $data= [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password'=> Hash::make($request->password)
+            ];
+            User::create($data);
+            return redirect()->route('loginUser')->with([
+                'mesErr' => 'Đăng kí thành công'
+            ]);
+        }
     }
 }

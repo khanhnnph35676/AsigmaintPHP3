@@ -179,3 +179,28 @@ a{
     left: 5%;
     top: 5%;
 }
+
+
+/* trang đăng nhập */
+
+#form-login{
+    position: fixed;
+    top: 16%;
+    right: 35%;
+    border: 2px solid #c8c6c6;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(155, 154, 154);
+    padding: 30px;
+}
+
+.bg-red{
+    background: var(--color-red);
+}
+
+.bg-red img{
+    position: fixed !important;
+}
+
+.bg-white{
+    background: whitesmoke;
+}
