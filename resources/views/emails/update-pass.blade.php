@@ -17,42 +17,34 @@
             <a href="{{ route('user.') }}"><img src="{{asset('img/icon/image 40.png')}}" width="300" height=""></a>
         </div>
     </div>
-    <form action="{{ route('postRegisterUser') }}" method="POST" style="width:600px;" id="form-login">
-
+    @php
+        $email = $_GET['email'];
+    @endphp
+    <form action="{{ route('updatePostPass') }}" method="POST" style="width:600px;" id="form-login">
         <div class="headline d-flex align-items-center gap-2 justify-content-center mb-4">
-            <h4>Đăng ký </h4>
+            <h4>Dổi mật khẩu </h4>
             <img src="{{asset('img/icon/image 40.png')}}" width="130" height="">
         </div>
         @csrf
+        <input type="hidden" name="email" value="{{ $email }}">
         <div class="pt-3">
-            <label for="">Tên tài khoản:</label>
-            <input type="text" name="name" placeholder="Nhập tên" class="form-control mt-2">
-            @error('name')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class="pt-3">
-            <label for="">Email</label>
-            <input type="text" name="email" placeholder="Nhập email" class="form-control mt-2">
-            @error('email')
-                <span class="text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class="pt-3">
-            <label for="">Mật khẩu</label>
+            <label for="">Mật khẩu mới</label>
             <input type="password" name="password" placeholder="Nhập mật khẩu" class="form-control mt-2">
             @error('password')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
         </div>
         <br>
-        <button type="submit" class="btn btn-danger">Đăng ký</button>
-        <a href="{{ route('loginUser') }}" class="btn btn border ms-3">Đăng nhập</a>
+        <div class="wrapper--login-user">
+            <div>
+                <button type="submit" class="btn btn-danger">Xác nhận đổi</button>
+            </div>
+        </div>
         <br><br>
-    @if (session('mesErr'))
+
+    @if(session('mesErr'))
         <span class="text-danger"> {{ session('mesErr') }}</span>
     @endif
-    {{ session()->forget('mesErr') }}
     </form>
     <script src=" {{ asset('acssets/bootstrap.bundle.min.js') }} "></script>
 </body>

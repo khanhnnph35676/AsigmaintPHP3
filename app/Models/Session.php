@@ -10,7 +10,7 @@ class Session extends Model
     use HasFactory;
     protected $table = 'sessions';
      public $fileable= [
-        'user_id',
+        'user_id ',
         'ip_address',
         'user_agent',
         'payload',

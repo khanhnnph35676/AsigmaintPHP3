@@ -14,7 +14,7 @@
     <div class="row" style="height: 100vh">
         <div class="col-8 bg-white"></div>
         <div class="col-4 bg-red">
-            <img src="{{asset('img/icon/image 40.png')}}" width="300" height="">
+            <a href="{{ route('user.') }}"><img src="{{asset('img/icon/image 40.png')}}" width="300" height=""></a>
         </div>
     </div>
     <form action="{{ route('postLoginUser') }}" method="POST" style="width:600px;" id="form-login">
@@ -22,7 +22,6 @@
             <h4>Đăng nhập </h4>
             <img src="{{asset('img/icon/image 40.png')}}" width="130" height="">
         </div>
-
         @csrf
         <div class="pt-3">
             <label for="">Email</label>
@@ -44,13 +43,19 @@
             <label for="">Remember me</label>
         </div>
         <br>
-        <button type="submit" class="btn btn-danger">Đăng nhập</button>
-        <a href=" {{ route('registerUser') }} " class="btn btn border ms-3">Đăng ký</a>
+        <div class="wrapper--login-user">
+            <div>
+                <button type="submit" class="btn btn-danger">Đăng nhập</button>
+                <a href=" {{ route('registerUser') }} " class="btn btn border ms-3">Đăng ký</a>
+            </div>
+            <a href="{{route('quenMatKhau')}}">Quên mật khẩu</a>
+        </div>
+
         <br><br>
-    @if (session('mesErr'))
+
+    @if(session('mesErr'))
         <span class="text-danger"> {{ session('mesErr') }}</span>
     @endif
-    {{ session()->forget('mesErr') }}
     </form>
     <script src=" {{ asset('acssets/bootstrap.bundle.min.js') }} "></script>
 </body>

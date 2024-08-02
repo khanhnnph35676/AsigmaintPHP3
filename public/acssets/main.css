@@ -1,32 +1,29 @@
-:root{
-    --color-primary: linear-gradient(to bottom,#37373794, #3737379e, #37373795);
-    --color-secondary: rgb(222, 222, 222);
-    --color-primarylight: linear-gradient(to bottom,#f4eadc9a, #ebe5c8, #ebe5cbec,#ebe5cb);
-}
-
-html, body {
-    background: var(--color-primary);
-    background-repeat: no-repeat;
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* .bg-dark-mode {
-    background-color: var(--color-primary);
-    color: white;
+:root{
+    --color-primary: linear-gradient(to bottom,#000000cd, #0c0c0cc7, #131212c8);
+    --color-secondary: rgb(222, 222, 222);
+    --color-primarylight: linear-gradient(to bottom,#f4eadc9a, #ebe5c8, #ebe5cbec,#ebe5cb);
 }
 
-.bg-light-mode {
-    background-color: var(--color-primarylight);
-    color: black;
-} */
-*{
+body {
+    background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: var(--color-secondary);
 }
+body {
+    background: var(--color-primary);
+}
+
+
+
+
 
 /* cài đặt màu */
 .edit-bg-color{
@@ -91,6 +88,13 @@ a{
   }
 
 /* -------------------------Header ---------------------- */
+.fa-lg{
+    color: var(--color-secondary);
+}
+
+.wrapper-acount{
+    color: var(--color-secondary);
+}
 
 .header{
     position: fixed !important;
@@ -98,8 +102,9 @@ a{
     width: 84%;
     box-shadow: 0 0 10px rgba(30, 30, 30, 0.5); /* Tạo hiệu ứng đổ bóng khi focus */
     align-items: center !important;
-    z-index: 11111;
+    z-index: 1111;
     background: rgb(40, 39, 39);
+    color: white;
 }
 
 .custom-input{
@@ -224,6 +229,7 @@ a{
     scrollbar-width: thin; /* Thiết lập độ dày của thanh cuộn */
     scrollbar-color: #888 #333;
     height:100%;
+    z-index: 1111;
 }
 
 .left-bar::-webkit-scrollbar {
@@ -309,7 +315,6 @@ a{
 
 .radius span{
     font-size: 14px;
-    color: var(--color-primarylight);
 }
 
 .width49pt{
@@ -428,3 +433,5 @@ a{
 
 /* -----------------------trang dăng nhập-------------------- */
 
+
+/*------------Trang thêm sản phẩm --------------- */

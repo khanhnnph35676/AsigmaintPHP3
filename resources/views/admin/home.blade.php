@@ -4,7 +4,6 @@
 @endpush
 
 @section('content')
-    <div class="col-10 content-bar">
         <!-- tên trang -->
         <div class="wrapper-icon pt-2 pb-2 mb-4">
             <i class="fa-solid fa-house fa-sm" style="color: #dedede;"></i>
@@ -231,9 +230,6 @@
                 <h5 class="m-2">Top Categories</h5>
             </div>
         </div>
-        <!-- footer -->
-        <p>footer</p>
-    </div>
 @endsection
 
 @push('scriptHome')

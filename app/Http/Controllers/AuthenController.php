@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\LoginAdminRequest;
+use App\Http\Requests\RegisterAdminRequest;
 use App\Models\Session;
 
 class AuthenController extends Controller
@@ -15,16 +17,7 @@ class AuthenController extends Controller
     public function login(){
         return view('admin.login');
     }
-    public function postLogin(Request $request){
-        $request->validate([
-            'email' =>['required', 'email'],
-            'password' =>'required'
-        ],
-        [
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'password.required' => 'Password không được để trống'
-        ]);
+    public function postLogin(LoginAdminRequest $request){
         $data = [
             'email' => $request->email,
             'password' => $request->password
@@ -51,18 +44,7 @@ class AuthenController extends Controller
     public function register(){
         return view('admin.register');
     }
-    public function postRegister(Request $request){
-        $request->validate([
-                'email'=>['required','email'],
-                'password'=> 'required',
-                'name'=>'required',
-            ],
-            [
-                'email.required' => 'Email không được để trống',
-                'email.email' => 'Email không đúng định dạng',
-                'password.required' => 'Password không được để trống',
-                'name.required'=>'Bạn chưa nhập tên'
-            ]);
+    public function postRegister(RegisterAdminRequest $request){
         $check = User::where('email', $request->email)->exists();
         if($check){
             return redirect()->back()->with([
@@ -85,58 +67,34 @@ class AuthenController extends Controller
     public function loginUser(){
         return view('user.login');
     }
-    public function postLoginUser(Request $request){
-        $request->validate([
-            'email' =>['required', 'email'],
-            'password' =>'required'
-        ],
-        [
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'password.required' => 'Password không được để trống'
-        ]);
+    public function postLoginUser(LoginAdminRequest $request){
         $data =[
             'email' => $request->email,
             'password' => $request->password
         ];
         $remember = $request->has('remember');
-        $idUser = Auth::id();
-        $minutes = 60; // Thời gian sống của cookie tính bằng phút
-
         if(Auth::attempt($data,$remember)){
             session()->put('mes', 'Đăng nhập thành công');
             return redirect()->route('user.');
         }else{
-
             return redirect()->back()->with([
                 'mesErr' =>'Bạn đăng nhập sai tài khoản hoặc mật khẩu'
             ]);
-
         };
     }
 // đăng xuất
     public function logoutUser(){
+        // $idUser = Auth::id();
+        // Session::where('user_id',$idUser)->delete();
         Auth::logout();
-        return redirect()->route('loginUser')->with([
-            'mesErr' => 'Đăng xuất thành công'
-        ]);
+        session()->put('mes', 'Đăng xuất thành công');
+        return redirect()->back();
     }
 // đăng kí
     public function registerUser(){
         return view('user.register');
     }
-    public function postRegisterUser(Request $request){
-        $request->validate([
-            'email'=>['required','email'],
-            'password'=> 'required',
-            'name'=>'required',
-        ],
-        [
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'password.required' => 'Password không được để trống',
-            'name.required'=>'Bạn chưa nhập tên'
-        ]);
+    public function postRegisterUser(RegisterAdminRequest $request){
         // check email không được trùng
         $check = User::where('email', $request->email)->exists();
         if($check){

@@ -204,3 +204,9 @@ a{
 .bg-white{
     background: whitesmoke;
 }
+
+.wrapper--login-user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

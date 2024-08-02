@@ -48,14 +48,17 @@
             <div class="col-3"></div>
             <div class="col-2 d-flex justify-content-around">
                 <i class="pointer fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i>
-                @if (session('mes'))
+                @if (isset(Auth::user()->name))
                 <div class="alert alert-dark alert-dismissible fade show message" role="alert">
                     {{ session('mes') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    
+                </div>
+                @else
+                <div class="alert alert-danger alert-dismissible fade show message" role="alert">
+                    {{ session('mes') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 @endif
-
                 <p class="d-inline-flex gap-1">
                     <a data-bs-toggle="collapse" data-bs-target="#info" aria-expanded="false" aria-controls="info">
                         <i class="pointer fa-regular fa-user fa-lg" style="color: #000000;"></i>
@@ -63,12 +66,12 @@
                 </p>
                 <div class="collapse" id="info">
                     {{-- khi chưa đăng nhập thành công --}}
-                    @if (!session('mes') )
+                    @if (empty(Auth::user()->name))
                         <div class="card card-body p-1 ps-0">
                             <ul class="p-2">
                                 <li class="mt-3 ms-2 pe-5"><a href="{{ route('loginUser') }}">Đăng nhập
                                     </a></li>
-                                <li class="mt-3 ms-2 pe-5"><a href="{{ route('logoutUser') }}">
+                                <li class="mt-3 ms-2 pe-5"><a href="{{ route('registerUser') }}">
                                         Đăng ký
                                     </a></li>
                             </ul>
@@ -76,14 +79,14 @@
                     @endif
 
                     {{-- khi  đăng nhập thành công --}}
-                    @if (session('mes') )
+                    @if (isset(Auth::user()->name))
                         <div class="card card-body p-1 ps-0">
                             <ul class="p-2">
                                 <li class="mt-2 pe-5"><a href="">
                                         <div class="wrapper-img-user d-flex gap-1">
                                             <img src="{{ asset('img/prd/sp_3.png') }}" style=" object-fit: cover;"
                                                 class="radius-50" alt="" width="70px" height="70px">
-                                            <h5> {{session('mes') }}</h5>
+                                            <h5> {{Auth::user()->name }}</h5>
                                         </div>
 
                                     </a></li>

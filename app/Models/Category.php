@@ -13,4 +13,9 @@ class Category extends Model
     public $fillable = [
         'name'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
+    }
 }

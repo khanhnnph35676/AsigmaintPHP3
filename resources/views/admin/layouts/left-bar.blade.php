@@ -1,4 +1,4 @@
-<div class="col-2 border left-bar">
+
     <h1 class="ms-2"> <a href="">Admin</a> </h1>
     <hr>
     <ul class="p-0">
@@ -69,4 +69,3 @@
     </ul>
 
     <h6 class="ms-2">BIỂU ĐỒ & BẢNG</h6>
-</div>

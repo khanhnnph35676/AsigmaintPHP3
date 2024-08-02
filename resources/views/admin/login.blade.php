@@ -33,8 +33,13 @@
                 <label for="">Remember me</label>
             </div>
             <br><br>
-            <button type="submit" class="btn btn-success">Đăng nhập</button>
-            <a  class="btn btn border" href="{{route('register')}}">Đăng kí</a>
+            <div class="wrapper-btn ms-1">
+                <div>
+                    <button type="submit" class="btn btn-success">Đăng nhập</button>
+                    <a  class="btn btn border" href="{{route('register')}}">Đăng kí</a>
+                </div>
+                <a href="" class="me-1">Quên mật khẩu</a>
+            </div>
             <br><br>
             @if (session('mesErr'))
                 <span class="text-danger"> {{ session('mesErr') }}</span>

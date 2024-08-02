@@ -1,19 +1,22 @@
-<div class="header row">
+<div class="header row" id="bg-header">
     <div class="col-7 wrapper-input">
         <input type="text" class="form-control custom-input" placeholder="Nhập để tìm kiếm">
         <button class="search">
-            <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i>
+            <i class="fa-solid fa-magnifying-glass fa-lg iii"></i>
         </button>
     </div>
-    <div class="col-2"></div>
+
+    <div class="col-2">
+
+    </div>
     <div class="col-1 mes pointer">
-        <i class="fa-solid fa-qrcode fa-xl" style="color: #dedede;"></i>
-        <div class="wrapper-mes text-white">
-            <i class="fa-regular fa-bell fa-xl" style="color: #dedede;"></i>
-            <span>7</span>
+        <i class="fa-solid fa-qrcode fa-xl" ></i>
+        <div class="wrapper-mes">
+            <i class="fa-regular fa-bell fa-xl"></i>
+            <span id="message" >7</span>
         </div>
     </div>
-    <div class="col-2 pointer acount pt-3">
+    <div class="col-2 pointer acount pt-3 ">
         <p>
             <button class="d-flex gap-2 align-items-center" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

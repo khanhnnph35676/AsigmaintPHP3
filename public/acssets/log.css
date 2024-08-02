@@ -9,3 +9,9 @@
     left: 37%;
     top: 20%;
 }
+
+.wrapper-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
