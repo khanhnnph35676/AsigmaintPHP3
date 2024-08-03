@@ -3,6 +3,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
+
 //---------------------------admin------------------------------------------------
 // đăng nhập
 Route::get('login',[AuthenController::class, 'login'])->name('login');
@@ -30,6 +33,30 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>'checkAdmin'
         Route::post('update-product/{idProduct}',[ProductController::class, 'updatePostProduct'])->name('updatePostProduct');
     });
     Route::group(['prefix' => 'users', 'as' => 'users.'], function(){
+        Route::get('list-users',[UserController::class, 'listUsers'])->name('listUsers');
+        // add
+        Route::post('add-user',[UserController::class, 'addUser'])->name('addUser');
+        // update CHÚ Ý
+        /*
+            1.Người quản lý cũng không có quyền biết mật khẩu của khách
+            2.Email phải cố định không sửa được
+            3.V à chỉ đc đổi tên, thay quyền
+         */
+        Route::get('update-user/{idUser}',[UserController::class, 'updateUser'])->name('updateUser');
+        Route::post('update-user/{idUser}',[UserController::class, 'updatePostUser'])->name('updatePostUser');
+        // delete
+        Route::delete('delete-user',[UserController::class, 'deleteUser'])->name('deleteUser');
+    });
+    Route::group(['prefix'=> 'categories', 'as'=>'categories.'], function(){
+        // list
+        Route::get('list-categories',[CategoryController::class,'listCategories'])->name('listCategories');
+        // add
+        Route::post('add-category',[CategoryController::class,'addPostCategory'])->name('addPostCategory');
+        //update
+        Route::get('update-category/{id}',[CategoryController::class,'updateCategory'])->name('updateCategory');
+        Route::post('update-category/{id}',[CategoryController::class,'updatePostCategory'])->name('updatePostCategory');
+        // delete
+        Route::delete('delete-category',[CategoryController::class,'deleteCategory'])->name('deleteCategory');
     });
 });
 
@@ -50,7 +77,7 @@ Route::get('update-new-pass',[MailController::class,'updateNewPass'])->name('upd
 Route::post('update-new-pass', [MailController::class, 'updatePostPass'])->name('updatePostPass');
 
 
-Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
+Route::group(['prefix' => 'user', 'as'=>'user.','middleware'=>'checkUser'], function(){
     Route::get('/',function(){
         return view('user.home');
     });

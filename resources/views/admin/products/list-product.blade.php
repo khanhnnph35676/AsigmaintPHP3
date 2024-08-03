@@ -76,7 +76,7 @@
                                      <img src="{{ asset($image->image_url)}}" class="p-2" width="80" height="80" alt="" style="object-fit: cover;">
                                 @endforeach
                             </td>
-                            <td> {{ number_format($value->price), 2, '.', '.'}} Vnđ </td>
+                            <td>{{ number_format($value->price, 0, '.', '.') }} Vnđ </td>
                             <td> {{ $value->description }} </td>
                             <td> {{ $value->category->name }} </td>
                             <td> </td>

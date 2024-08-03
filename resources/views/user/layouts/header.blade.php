@@ -48,13 +48,8 @@
             <div class="col-3"></div>
             <div class="col-2 d-flex justify-content-around">
                 <i class="pointer fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i>
-                @if (isset(Auth::user()->name))
+                @if (session('mes'))
                 <div class="alert alert-dark alert-dismissible fade show message" role="alert">
-                    {{ session('mes') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                @else
-                <div class="alert alert-danger alert-dismissible fade show message" role="alert">
                     {{ session('mes') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -84,8 +79,8 @@
                             <ul class="p-2">
                                 <li class="mt-2 pe-5"><a href="">
                                         <div class="wrapper-img-user d-flex gap-1">
-                                            <img src="{{ asset('img/prd/sp_3.png') }}" style=" object-fit: cover;"
-                                                class="radius-50" alt="" width="70px" height="70px">
+                                            <img src="{{ asset('img/user/1722559877.png')}}" style=" object-fit: cover;"
+                                                    class="radius-50" alt="acount" width="70px" height="70px">
                                             <h5> {{Auth::user()->name }}</h5>
                                         </div>
 

@@ -40,24 +40,26 @@ function applyTheme(theme) {
     if (theme === 'dark') {
         document.body.style.backgroundColor = 'var(--color-primary)';
         document.querySelector('.main-content').style.backgroundColor = 'var(--color-primary)';
-        document.body.style.color = 'white';
+        document.body.style.color = 'var(--color-secondary)';
         document.querySelector('.header').style.backgroundColor = 'rgb(40, 39, 39)';
-        document.querySelector('.header').style.color = 'white';
+        document.querySelector('.wrapper-acount').style.color = 'white';
         document.querySelector('#message').style.color = 'white';
-        document.querySelector('.fa-lg').style.color = 'black';
+        document.querySelector('.fa-lg').style.color = 'var(--color-secondary)';
         document.querySelector('.left-bar').style.backgroundColor = 'rgba(0, 0, 0, 0.543)';
-        document.querySelector('.left-bar').style.color = 'white';
+        document.querySelector('.left-bar').style.color = 'var(--color-secondary)';
+        document.querySelector('.mes').style.color = 'var(--color-secondary)';
         localStorage.setItem('theme', 'dark');
     } else {
         document.body.style.backgroundColor = 'var(--color-secondary)';
         document.body.style.color = 'black';
         document.querySelector('.main-content').style.backgroundColor = 'var(--color-secondary)';
         document.querySelector('.header').style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        document.querySelector('.header').style.color = 'black';
+        document.querySelector('.wrapper-acount').style.color = 'black';
         document.querySelector('#message').style.color = 'black';
         document.querySelector('.fa-lg').style.color = 'black';
         document.querySelector('.left-bar').style.backgroundColor = 'rgb(40, 39, 39)';
         document.querySelector('.left-bar').style.color = 'white';
+        document.querySelector('.mes').style.color = 'black';
         localStorage.setItem('theme', 'light');
     }
 }
@@ -106,33 +108,4 @@ document.getElementById('light-mode').addEventListener('click', function(event) 
     applyTheme('light');
 });
 
-
-
-//   document.getElementById('dark-mode').addEventListener('click', function(event) {
-//     event.preventDefault();
-//     document.body.style.backgroundColor = 'var(--color-primary)';
-//     document.querySelector('.main-content').style.backgroundColor ='var(--color-primary)';
-//     document.body.style.color = 'white';
-//     document.querySelector('.header').style.color ='white';
-//     document.querySelector('#message').style.color ='white';
-//     document.querySelector('.fa-lg').style.color ='black';
-//     document.querySelector('.header').style.backgroundColor = 'rgb(40, 39, 39)';
-//     document.querySelector('.left-bar').style.backgroundColor ='rgba(0, 0, 0, 0.543)';
-//     document.querySelector('.icon').style.color ='var(--color-primary)';
-//   });
-//   document.getElementById('light-mode').addEventListener('click', function(event) {
-//     event.preventDefault();
-//     document.body.style.backgroundColor = 'var(--color-secondary)';
-//     document.body.style.color = 'black';
-//     document.querySelector('.main-content').style.backgroundColor ='var(--color-secondary)';
-//     document.querySelector('.header').style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-//     document.querySelector('.header').style.color ='black';
-//     document.querySelector('.wrapper-acount').style.color ='black';
-//     document.querySelector('#message').style.color ='white';
-//     document.querySelector('.iii').style.color ='black';
-//     document.querySelector('.iiibl1').style.color ='black';
-//     document.querySelector('.iiibl').style.color ='black';
-//     document.querySelector('.left-bar').style.backgroundColor ='rgb(40, 39, 39)';
-//     document.querySelector('.left-bar').style.color ='white';
-//   });
 

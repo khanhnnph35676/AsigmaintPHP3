@@ -1,5 +1,5 @@
 <div class="header row" id="bg-header">
-    <div class="col-7 wrapper-input">
+    <div class="col-6 wrapper-input">
         <input type="text" class="form-control custom-input" placeholder="Nhập để tìm kiếm">
         <button class="search">
             <i class="fa-solid fa-magnifying-glass fa-lg iii"></i>
@@ -16,16 +16,15 @@
             <span id="message" >7</span>
         </div>
     </div>
-    <div class="col-2 pointer acount pt-3 ">
-        <p>
+    <div class="col-3 pointer acount pt-3 d-flex justify-content-end">
+        <p class="me-4">
             <button class="d-flex gap-2 align-items-center" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 <div class="wrapper-img-acount">
-                    <img class="img" src="../img/z5533290989838_3283c606f6b74265ed464db5791b7472.jpg" width="100%"
-                        height="100%" alt="">
+                    <img class="img" src="{{ asset('img/user/1722559877.png') }}" alt="">
                 </div>
                 <div class="wrapper-acount">
-                    <span class="fw-bold">Tên admin</span> <br>
+                    <span class="fw-bold"> {{ Auth::user()->name}}</span> <br>
                     <span> Nhà thiết kế web</span>
                 </div>
             </button>

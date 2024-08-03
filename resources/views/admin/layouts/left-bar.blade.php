@@ -50,9 +50,9 @@
             <li class="fs-6 p-1"> <a href=""> <i class="fa-brands fa-product-hunt fa-lg me-2"
                         style="color: #dedede;"></i>
                     Chi tiết sản phẩm </a></li>
-            <li class="fs-6 p-1"> <a href=""> <i class="fa-solid fa-folder-open fa-lg me-2"
+            <li class="fs-6 p-1"> <a href="{{ route('admin.categories.listCategories') }}"> <i class="fa-solid fa-folder-open fa-lg me-2"
                         style="color: #dedede;"></i>
-                    Danh mục </a></li>
+                    Danh mục sản phẩm</a></li>
         </ul>
         <li class="menu">
             <div class="wraper-icon pt-2 pb-2">
@@ -64,7 +64,7 @@
         <ul class="menu-content fs-4 mt-1">
             <li class="fs-6 p-1"> <a href=""> Thành viên</a></li>
             <li class="fs-6 p-1"> <a href=""> Khách hàng</a></li>
-            <li class="fs-6 p-1"> <a href=""> Tổng tài khoản </a></li>
+            <li class="fs-6 p-1"> <a href="{{ route('admin.users.listUsers') }}"> Tổng tài khoản </a></li>
         </ul>
     </ul>
 

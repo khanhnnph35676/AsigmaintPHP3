@@ -12,6 +12,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   @stack('styleHome')
   @stack('styleListProducts')
+  @stack('stylehomeCategory')
+  @stack('stylehomeUserAdmin')
 </head>
 <body>
   <!-- các nút chỉnh màu -->
@@ -43,6 +45,7 @@
         @yield('content')
         @include('admin.layouts.footer')
     </div>
+
     {{-- footer --}}
 
   </div>
@@ -54,6 +57,8 @@
 
   @stack('scriptHome')
   @stack('scriptListProducts')
+  @stack('scriptCtgr')
+  @stack('scriptUserAdmin')
 </body>
 
 </html>

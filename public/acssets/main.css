@@ -143,8 +143,8 @@ a{
 
 
 .wrapper-img-acount{
-    width: 40px;
-    height: 40px;
+    width: 49px;
+    height: 49px;
     border-radius: 50%;
     border: 1px solid #dedede;
 }
@@ -387,10 +387,6 @@ a{
     align-items: center;
 }
 
-.wrapper-img-acount{
-    width: 30px;
-    height: 30px;
-}
 
 .wrapper-img-acount img{
     width: 100%;
@@ -435,3 +431,10 @@ a{
 
 
 /*------------Trang thêm sản phẩm --------------- */
+
+
+/* -------------trang danh mục---------------------- */
+.add-caegory,.list-categories{
+    border: 1px solid black;
+    border-radius: 10px;
+}

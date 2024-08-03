@@ -60,11 +60,11 @@ class ProductController extends Controller
     // delete
     public function deleteProduct(Request $request){
         $product = Product::find($request->idProduct);
-        $image = ProductImage::where('image_id', $request->idProduct)->exists();
-        if($image){
+        $images = ProductImage::where('image_id',$request->idProduct)->get();
+        foreach($images as $image){
             if($image->image_url !=null && $image->image_url != ''){
                 File::delete(public_path($image->image_url));
-                $image->delete();
+                ProductImage::where('image_id',$request->idProduct)->delete();
             }
         }
         $product->delete();
@@ -85,12 +85,16 @@ class ProductController extends Controller
     }
 
     public function updatePostProduct($idProduct,ProductAdminRequest $request){
-        $images = ProductImage::where('image_id',$idProduct)->get();
-        foreach($images as $image){
-            $imageUrl = $image->image_url;
-        };
+        $image = ProductImage::where('image_id',$idProduct)->first();
 
+        if(isset($image->image_url)){
+            $imageUrl = $image->image_url;
+        }else{
+            $imageUrl = '';
+        }
+        // dd($image->image_url);
         if($request->hasFile('image_url')){
+            $images = ProductImage::where('image_id',$idProduct)->get();
             foreach($images as $image){
                 if($image->image_url !=null && $image->image_url != ''){
                     File::delete(public_path($image->image_url));
@@ -104,22 +108,21 @@ class ProductController extends Controller
             $imageUrl = $link . $nameImage;
         }
 
-        $dataImage =[
-            'image_id' =>  $request->idProduct,
-            'image_url' => $imageUrl,
-            'image_type' => 'main'
-        ];
         $data =[
             'name'=> $request->name,
             'price' => $request->price,
             'description' => $request->description,
             'category_id' => $request->category_id
         ];
-
         Product::where('id',$idProduct)->update($data);
+        $dataImage =[
+            'image_id' =>  $request->idProduct,
+            'image_url' => $imageUrl,
+            'image_type' => 'main'
+        ];
         ProductImage::create($dataImage);
         return redirect()->route('admin.products.listProducts')->with([
-            'message' => 'Cập nhật thành công'
+            'message' => 'Cập nhật sản phẩm thành công'
         ]);
     }
 }

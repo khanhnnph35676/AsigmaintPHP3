@@ -54,7 +54,8 @@ class AuthenController extends Controller
             $data= [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password'=> Hash::make($request->password)
+                'password'=> Hash::make($request->password),
+                'role' => '1'
             ];
             User::create($data);
             return redirect()->route('login')->with([
@@ -70,12 +71,14 @@ class AuthenController extends Controller
     public function postLoginUser(LoginAdminRequest $request){
         $data =[
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
+            'role' => '2'
         ];
         $remember = $request->has('remember');
         if(Auth::attempt($data,$remember)){
-            session()->put('mes', 'Đăng nhập thành công');
-            return redirect()->route('user.');
+            return redirect()->route('user.')->with([
+                'mes'=> 'Đăng nhập thành công'
+            ]);
         }else{
             return redirect()->back()->with([
                 'mesErr' =>'Bạn đăng nhập sai tài khoản hoặc mật khẩu'
@@ -84,11 +87,18 @@ class AuthenController extends Controller
     }
 // đăng xuất
     public function logoutUser(){
-        // $idUser = Auth::id();
+        $idUser = Auth::id();
         // Session::where('user_id',$idUser)->delete();
+        /*
+        Tôi sẽ logout Đúng cái tài khoản mình cần thôi
+        */
+        $user = User::find($idUser);
+        dd($user);
+        Auth::logoutOtherDevice($user->id);
         Auth::logout();
-        session()->put('mes', 'Đăng xuất thành công');
-        return redirect()->back();
+        return redirect()->back()->with([
+            'mes' => 'Đăng xuất thành công'
+        ]);
     }
 // đăng kí
     public function registerUser(){
@@ -105,7 +115,8 @@ class AuthenController extends Controller
             $data= [
                 'name' => $request->name,
                 'email' => $request->email,
-                'password'=> Hash::make($request->password)
+                'password'=> Hash::make($request->password),
+                'role' => '2'
             ];
             User::create($data);
             return redirect()->route('loginUser')->with([
