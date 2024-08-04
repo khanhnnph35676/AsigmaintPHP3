@@ -16,7 +16,7 @@ class CheckUserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            if(Auth::user()->role == '2'|| Auth::user()->role == NULL){
+            if(Auth::user()->role == '2'|| Auth::user()->role == NULL || Auth::user()->role == ''){
                 return $next($request);
             }
         }

@@ -67,4 +67,8 @@ class MailController extends Controller
         }
         return redirect()->back()->withErrors(['email' => 'Email này của bạn không tồn tại']);
     }
+    // làm thêm phần khi đăng kí sẽ gửi lên mail là thành công
+    public function SuccesRegister(){
+
+    }
 }

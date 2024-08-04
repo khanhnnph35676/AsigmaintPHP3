@@ -76,7 +76,7 @@ class AuthenController extends Controller
         ];
         $remember = $request->has('remember');
         if(Auth::attempt($data,$remember)){
-            return redirect()->route('user.')->with([
+            return redirect()->route('user.homeProducts')->with([
                 'mes'=> 'Đăng nhập thành công'
             ]);
         }else{

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\ProuductController;
 
 //---------------------------admin------------------------------------------------
 // đăng nhập
@@ -70,18 +71,29 @@ Route::get('logout-user',[AuthenController::class, 'logoutUser'])->name('logoutU
 // đăng kí
 Route::get('register-user',[AuthenController::class, 'registerUser'])->name('registerUser');
 Route::post('register-user',[AuthenController::class, 'postRegisterUser'])->name('postRegisterUser');
+// thông báo phần đăng kí mới có tài khoản mới thành công
+
 // quên mật khẩu
 Route::get('quen-mat-khau',[MailController::class,'quenMatKhau'])->name('quenMatKhau');
 Route::post('recover-pass',[MailController::class,'recoverPass'])->name('recoverPass');
 Route::get('update-new-pass',[MailController::class,'updateNewPass'])->name('updateNewPass');
 Route::post('update-new-pass', [MailController::class, 'updatePostPass'])->name('updatePostPass');
 
+//,'middleware'=>'checkUser'
+Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
+    // sản phẩm trang chủ
+    Route::get('/',[App\Http\Controllers\User\ProuductController::class,'homeProducts'])->name('homeProducts');
 
-Route::group(['prefix' => 'user', 'as'=>'user.','middleware'=>'checkUser'], function(){
-    Route::get('/',function(){
-        return view('user.home');
+    Route::group(['prefix'=>'product','as'=>'product.'],function(){
+        Route::get('list-product',[App\Http\Controllers\User\ProuductController::class,'listProductsUser'])->name('listProductsUser');
+
+        Route::post('search-product',[App\Http\Controllers\User\ProuductController::class,'searchProduct'])->name('searchProduct');
+        Route::post('search-category',[App\Http\Controllers\User\ProuductController::class,'searchCategory'])->name('searchCategory');
+
+
+        Route::get('detail-product/{idProduct}',[App\Http\Controllers\User\ProuductController::class,'detaiProduct'])->name('detaiProduct');
+
     });
-
 });
 
 

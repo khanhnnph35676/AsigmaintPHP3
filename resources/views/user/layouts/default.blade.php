@@ -18,10 +18,12 @@
 
     {{-- 3,footer --}}
     <div class="footer">
-        
+
     </div>
+
     <script src=" {{ asset('acssets/all.min.js') }}"></script>
     <script src=" {{ asset('acssets/bootstrap.bundle.min.js') }} "></script>
+    <script src=" {{ asset('acssets/user.js') }}"></script>
     @stack('script')
 </body>
 </html>
