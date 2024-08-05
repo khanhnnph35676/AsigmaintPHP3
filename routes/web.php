@@ -6,6 +6,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\ProuductController;
+use App\Http\Controllers\CartController;
 
 //---------------------------admin------------------------------------------------
 // đăng nhập
@@ -61,7 +62,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' =>'checkAdmin'
     });
 });
 
-// -----------------------------user----------------------------------------------------
+// -----------------------------user------------------------------------------
 
 // đăng nhập
 Route::get('login-user',[AuthenController::class, 'loginUser'])->name('loginUser');
@@ -72,6 +73,8 @@ Route::get('logout-user',[AuthenController::class, 'logoutUser'])->name('logoutU
 Route::get('register-user',[AuthenController::class, 'registerUser'])->name('registerUser');
 Route::post('register-user',[AuthenController::class, 'postRegisterUser'])->name('postRegisterUser');
 // thông báo phần đăng kí mới có tài khoản mới thành công
+Route::get('succes-register', [MailController::class, 'SuccesRegister'])->name('SuccesRegister');
+
 
 // quên mật khẩu
 Route::get('quen-mat-khau',[MailController::class,'quenMatKhau'])->name('quenMatKhau');
@@ -90,8 +93,15 @@ Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
         Route::post('search-product',[App\Http\Controllers\User\ProuductController::class,'searchProduct'])->name('searchProduct');
         Route::post('search-category',[App\Http\Controllers\User\ProuductController::class,'searchCategory'])->name('searchCategory');
 
-
         Route::get('detail-product/{idProduct}',[App\Http\Controllers\User\ProuductController::class,'detaiProduct'])->name('detaiProduct');
+    });
+    Route::group(['middleware'=>'checkUser'],function(){
+        Route::post('add-to-cart',[CartController::class,'addToCart'])->name('addToCart');
+        // Route::get('cart-header',[CartController::class,'cartHeader'])->name('cartHeader');
+        Route::get('view-cart',[CartController::class,'viewCart'])->name('viewCart');
+        Route::patch('update-cart',[CartController::class,'updateCart'])->name('updateCart');
+        Route::delete('delete-cart',[CartController::class,'deleteCart'])->name('deleteCart');
+
 
     });
 });

@@ -19,7 +19,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(ProductImage::class, 'image_id');
+        return $this->hasMany(ProductImage::class, 'image_id','id');
     }
 
     public function category()
@@ -27,4 +27,7 @@ class Product extends Model
         return $this->belongsTo(Category::class,'category_id','id');
     }
 
+    public function cart_detail(){
+        return $this->belongsTo(Cart_detail::class,'product_id','id');
+    }
 }

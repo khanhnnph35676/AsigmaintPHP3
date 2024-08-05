@@ -33,8 +33,8 @@
 @section('content')
     <div class="prds-home ms-5 me-5">
         <div class="heading-products mb-2">
-          <span class="fs-2">Trang chủ | </span>
-          <span class="fs-5">Trang san phẩm</span>
+          <span class="fs-2"><a href="{{route('user.homeProducts')}}">Trang chủ |</a></span>
+          <span class="fs-5">Trang sản phẩm</span>
 
         </div>
         <div class="row">
@@ -65,8 +65,10 @@
                         <!-- ảnh sp -->
                         <div class="image-product--content-products product-home">
                             @foreach ($value->images as $image)
-                                <a href=""><img src="{{ asset($image->image_url) }} " alt="" width="100%"
+                                @if ($image->image_type == 'main')
+                                <a href="{{route('user.product.detaiProduct',$value->id)}}"><img src="{{ asset($image->image_url) }} " alt="" width="100%"
                                     height="80%"></a>
+                                @endif
                             @endforeach
                             <div class="wrapper-action">
                                 <div class="action--content-products d-flex align-items-center justify-content-between p-1">

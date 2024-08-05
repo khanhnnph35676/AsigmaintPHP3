@@ -16,9 +16,7 @@ class CheckUserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            if(Auth::user()->role == '2'|| Auth::user()->role == NULL || Auth::user()->role == ''){
-                return $next($request);
-            }
+            return $next($request);
         }
         return redirect()->route('loginUser')->with([
             'mesErr' => 'Bạn nhập chưa đúng mật khẩu hoặc email của tài khoản'

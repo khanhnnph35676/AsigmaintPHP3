@@ -47,7 +47,6 @@ class MailController extends Controller
                 'mes', 'Không tìm thấy email bạn nhập'
             );
         }
-        dd(session()->all());
     }
     public function updateNewPass(){
         return view('emails.update-pass');
@@ -68,7 +67,30 @@ class MailController extends Controller
         return redirect()->back()->withErrors(['email' => 'Email này của bạn không tồn tại']);
     }
     // làm thêm phần khi đăng kí sẽ gửi lên mail là thành công
-    public function SuccesRegister(){
-
+    public function SuccesRegister(Request $request){
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y');
+        $titleMail = 'Đăng ký thành công'.$now;
+        $check = User::where('email', '=', $request->email)->exists();
+        if($check){
+            $to_email = $request->email;
+            // $url = 'http://127.0.0.1:8000/';
+            $link =url('user');
+            $data= [
+                'name'=>$titleMail,
+                'body'=>$link,
+                'email'=>$to_email
+            ];
+            Mail::send('emails.succes-register',['data'=>$data], function($message) use ($titleMail,$data){
+                $message->to($data['email'])->subject($titleMail);
+                $message->from($data['email'],$titleMail);
+            });
+            return redirect()->route('loginUser')->with(
+               'mesErr', 'Đăng kí thành công'
+            );
+        }else{
+            return redirect()->back()->with(
+                'mes', 'Không tìm thấy email bạn nhập'
+            );
+        }
     }
 }

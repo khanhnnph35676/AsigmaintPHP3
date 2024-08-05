@@ -61,7 +61,7 @@
                         @endif
                     @endforeach
                     <br><br>
-                    <input type="file" accept="image/*" name="image_url" class="form-control">
+                    <input type="file" accept="image/*" name="image_url[]" multiple class="form-control">
                 </div>
             </div>
         </div>

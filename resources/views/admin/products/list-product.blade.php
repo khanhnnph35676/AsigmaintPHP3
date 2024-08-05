@@ -11,6 +11,21 @@
         .form-addProduct option {
             color: black;
         }
+        .pagination .page-link {
+            color: #000; /* Change the text color to black */
+        }
+        .pagination .page-link:hover {
+            color: #000; /* Change the hover text color to black */
+            background-color: #f8f9fa; /* Optional: Change the hover background color */
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #000000c9; /* Change the background color of the active page to black */
+            border-color: #000; /* Change the border color of the active page to black */
+            color: white;
+        }
+        [aria-live="polite"] {
+            display: none;
+        }
     </style>
 @endpush
 
@@ -71,7 +86,7 @@
                         <tr style="height: 50px;">
                             <td> {{ $key + 1 }} </td>
                             <td> {{ $value->name }} </td>
-                            <td>
+                            <td class="d-flex">
                                 @foreach ($value->images as $image)
                                      <img src="{{ asset($image->image_url)}}" class="p-2" width="80" height="80" alt="" style="object-fit: cover;">
                                 @endforeach

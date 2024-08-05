@@ -72,7 +72,6 @@ class AuthenController extends Controller
         $data =[
             'email' => $request->email,
             'password' => $request->password,
-            'role' => '2'
         ];
         $remember = $request->has('remember');
         if(Auth::attempt($data,$remember)){
@@ -93,8 +92,8 @@ class AuthenController extends Controller
         Tôi sẽ logout Đúng cái tài khoản mình cần thôi
         */
         $user = User::find($idUser);
-        dd($user);
-        Auth::logoutOtherDevice($user->id);
+        // dd($user);
+        // Auth::logout($user->id);
         Auth::logout();
         return redirect()->back()->with([
             'mes' => 'Đăng xuất thành công'
@@ -119,9 +118,7 @@ class AuthenController extends Controller
                 'role' => '2'
             ];
             User::create($data);
-            return redirect()->route('loginUser')->with([
-                'mesErr' => 'Đăng kí thành công'
-            ]);
+            return redirect()->route('SuccesRegister',['email'=>$request->email]);
         }
     }
 }

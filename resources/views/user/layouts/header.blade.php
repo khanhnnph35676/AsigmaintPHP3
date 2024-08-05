@@ -112,40 +112,58 @@
                     <span>7</span>
                 </a>
                 <div class="cart-container" id="cart-container">
-                    <div class="cart-header">
-                        <h2>Giỏ hàng</h2>
-                        <span class="close-btn" id="close-cart-btn">&times;</span>
-                    </div>
-                    <div class="cart-items">
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <img src="path/to/product-image.jpg" alt="Product Image">
-                                <span>Product Name</span>
+                    <form action="">
+                        <div class="cart-header">
+                            <h2>Giỏ hàng</h2>
+                            <span class="close-btn" id="close-cart-btn">&times;</span>
+                        </div>
+                        <div class="cart-items">
+                            @php
+                                $tongTien = 0;
+                            @endphp
+                            @foreach ($cart->cart_details as $key => $value)
+                                <div class="cart-item">
+                                    <div class="item-info">
+                                        <div class="d-flex align-items-center gap-1">
+                                            @foreach ($value->product->images as $image)
+                                                @if ($image->image_type == 'main')
+                                                    <img src="{{ asset($image->image_url) }}" alt="Product Image"
+                                                        width="50" height="50" style="object-fit: cover;">
+                                                @endif
+                                            @endforeach
+                                            <div class="wrapper-input" style="width:50px;height:20px">
+                                                <input type="number" value="{{ $value->quantity }}"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <span>{{ $value->product->name }} </span>
+                                    </div>
+                                    <span><strong>
+                                            @php
+                                                $thanhTien = intval($value->product->price) * intval($value->quantity);
+                                                $tongTien += $thanhTien;
+                                                echo number_format($thanhTien, 0, '.', '.') . 'đ';
+                                            @endphp </strong></span>
+                                    <div class="d-flex gap-1">
+                                        <a href="" class="btn btn border"><i
+                                                class="fa-regular fa-pen-to-square fa-sm"
+                                                style="color: #000000;"></i></a>
+                                        <a href="" class="btn btn border"><i
+                                                class="fa-regular fa-trash-can fa-sm" style="color: #000000;"></i></a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="cart-footer">
+                            <div class="total">
+                                <span>Tổng tiền: </span>
+                                <span> @php echo number_format($tongTien, 0, '.', '.')  .'đ' @endphp</span>
                             </div>
-                            <span>$30.00</span>
+                            <a href="{{route('user.viewCart')}}" class="btn btn mt-3">Xem chi tiết</a>
+                            <button class="btnth" id="thanhtoan">Thanh toán ngay</button>
                         </div>
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <img src="path/to/product-image.jpg" alt="Product Image">
-                                <span>Product Name</span>
-                            </div>
-                            <span>$30.00</span>
-                        </div>
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <img src="path/to/product-image.jpg" alt="Product Image">
-                                <span>Product Name</span>
-                            </div>
-                            <span>$30.00</span>
-                        </div>
-                    </div>
-                    <div class="cart-footer">
-                        <div class="total">
-                            <span>Total:</span>
-                            <span>$90.00</span>
-                        </div>
-                        <button class="btnth" id="thanhtoan">Thanh toán</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

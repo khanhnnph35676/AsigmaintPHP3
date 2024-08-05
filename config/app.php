@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'providers' => [
+    // Các Service Provider khác
+    App\Providers\ViewServiceProvider::class,
+],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

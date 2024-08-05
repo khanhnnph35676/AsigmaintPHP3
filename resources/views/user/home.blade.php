@@ -99,8 +99,10 @@
                     <!-- ảnh sp -->
                     <div class="image-product--content-products">
                         @foreach ($value->images as $image)
+                            @if ($image->image_type == 'main')
                             <a href="{{route('user.product.detaiProduct',$value->id)}}"><img src="{{ asset($image->image_url) }} " alt="" width="100%"
                                 height="100%"></a>
+                            @endif
                         @endforeach
                         <div class="wrapper-action">
                             <div class="action--content-products d-flex align-items-center justify-content-between p-1">

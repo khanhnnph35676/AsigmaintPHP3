@@ -30,29 +30,26 @@ class ProductController extends Controller
     }
 
     public function addPostProduct(ProductAdminRequest $request){
-        $imageUrl = '';
-        if($request->hasFile('image_url')){
-            $image = $request->file('image_url');
-            $nameImage = time() . "." . $image->getClientOriginalExtension();
-            $link = "img/prd/";
-            $image->move(public_path($link), $nameImage);
-            $imageUrl = $link . $nameImage;
-        }
         $data =[
             'name'=> $request->name,
             'price' => $request->price,
             'description' => $request->description,
             'category_id' => $request->category_id
         ];
-        Product::create($data);
-        $newProduct = Product::where('name',$request->name)->first();
-        // dd($newProduct->id);
-        $dataImage =[
-            'image_id' =>  $newProduct->id,
-            'image_url' => $imageUrl,
-            'image_type' => 'main'
-        ];
-        ProductImage::create($dataImage);
+        $product = Product::create($data);
+        if($request->hasFile('image_url')){
+            $images = $request->file('image_url');
+            foreach($images as $key => $image){
+                $nameImage = time() . "_". uniqid() . $image->getClientOriginalExtension();
+                $link = "img/prd/";
+                $image->move(public_path($link), $nameImage);
+                ProductImage::create([
+                    'image_id' =>  $product->id,
+                    'image_url' => $link.$nameImage,
+                    'image_type' => $key == 0 ? 'main' : 'secondary'
+                ]);
+            }
+        }
         return redirect()->route('admin.products.listProducts')->with([
             'message' => 'Thêm mới thành công'
         ]);
@@ -85,13 +82,20 @@ class ProductController extends Controller
     }
 
     public function updatePostProduct($idProduct,ProductAdminRequest $request){
-        $image = ProductImage::where('image_id',$idProduct)->first();
+        $data =[
+            'name'=> $request->name,
+            'price' => $request->price,
+            'description' => $request->description,
+            'category_id' => $request->category_id
+        ];
+        Product::where('id',$idProduct)->update($data);
 
-        if(isset($image->image_url)){
-            $imageUrl = $image->image_url;
-        }else{
-            $imageUrl = '';
-        }
+        // $image = ProductImage::where('image_id',$idProduct)->first();
+        // if(isset($image->image_url)){
+        //     $imageUrl = $image->image_url;
+        // }else{
+        //     $imageUrl = '';
+        // }
         // dd($image->image_url);
         if($request->hasFile('image_url')){
             $images = ProductImage::where('image_id',$idProduct)->get();
@@ -101,28 +105,22 @@ class ProductController extends Controller
                     ProductImage::where('image_id',$idProduct)->delete();
                 }
             }
-            $image = $request->file('image_url');
-            $nameImage = time() . "." . $image->getClientOriginalExtension();
-            $link = "img/prd/";
-            $image->move(public_path($link), $nameImage);
-            $imageUrl = $link . $nameImage;
+            if($request->hasFile('image_url')){
+                $images = $request->file('image_url');
+                foreach($images as $key => $image){
+                    $nameImage = time() . "_". uniqid() . $image->getClientOriginalExtension();
+                    $link = "img/prd/";
+                    $image->move(public_path($link), $nameImage);
+                    ProductImage::create([
+                        'image_id' =>  $idProduct,
+                        'image_url' => $link.$nameImage,
+                        'image_type' => $key == 0 ? 'main' : 'secondary'
+                    ]);
+                }
+            }
         }
-
-        $data =[
-            'name'=> $request->name,
-            'price' => $request->price,
-            'description' => $request->description,
-            'category_id' => $request->category_id
-        ];
-        Product::where('id',$idProduct)->update($data);
-        $dataImage =[
-            'image_id' =>  $request->idProduct,
-            'image_url' => $imageUrl,
-            'image_type' => 'main'
-        ];
-        ProductImage::create($dataImage);
         return redirect()->route('admin.products.listProducts')->with([
-            'message' => 'Cập nhật sản phẩm thành công'
+            'message' => 'Sửa sản phẩm thành công'
         ]);
     }
 }

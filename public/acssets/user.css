@@ -24,7 +24,7 @@ a{
     position: fixed;
     top: 0;
     right: -100%;
-    width: 300px;
+    width: 330px;
     height: 100%;
     background-color: #fff;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -54,6 +54,7 @@ a{
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    align-items: center;
 }
 .cart-item img {
     width: 50px;
