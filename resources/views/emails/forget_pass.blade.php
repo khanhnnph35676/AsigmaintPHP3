@@ -13,7 +13,7 @@
     <div class="row" style="height: 100vh">
         <div class="col-8 bg-white"></div>
         <div class="col-4 bg-red">
-            <a href="{{ route('user.') }}"><img src="{{asset('img/icon/image 40.png')}}" width="300" height=""></a>
+            <a href="{{ route('user.homeProducts') }}"><img src="{{asset('img/icon/image 40.png')}}" width="300" height=""></a>
         </div>
     </div>
     <form action="{{ route('recoverPass') }}" method="POST" style="width:600px;" id="form-login">

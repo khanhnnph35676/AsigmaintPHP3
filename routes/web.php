@@ -89,10 +89,8 @@ Route::group(['prefix' => 'user', 'as'=>'user.'], function(){
 
     Route::group(['prefix'=>'product','as'=>'product.'],function(){
         Route::get('list-product',[App\Http\Controllers\User\ProuductController::class,'listProductsUser'])->name('listProductsUser');
-
         Route::post('search-product',[App\Http\Controllers\User\ProuductController::class,'searchProduct'])->name('searchProduct');
         Route::post('search-category',[App\Http\Controllers\User\ProuductController::class,'searchCategory'])->name('searchCategory');
-
         Route::get('detail-product/{idProduct}',[App\Http\Controllers\User\ProuductController::class,'detaiProduct'])->name('detaiProduct');
     });
     Route::group(['middleware'=>'checkUser'],function(){

@@ -53,10 +53,11 @@ class MailController extends Controller
     }
     public function updatePostPass(Request $request){
         $request->validate([
-            'password' =>'required'
+            'password' =>'required|confirmed'
         ],
         [
-            'password.required' => 'Password không được để trống'
+            'password.required' => 'Password không được để trống',
+            'password.confirmed' => 'Mật khẩu và nhập lại mật khẩu không khớp',
         ]);
         $user = User::where('email', $request->email)->first();
         if ($user) {

@@ -45,7 +45,11 @@
                     <p>Tên sản phẩm: {{ $product->name }} </p>
                     <p>Danh mục:{{ $product->category->name }} </p>
                     <p>Mô tả: {{ $product->description }}</p>
-                    <p>Số lượng: <input type="number" value="1" name="quantity"> </p>
+                    <p>Số lượng: <input type="number" value="1" name="quantity"></p>
+                    @error('quantity')
+                    <p class="text-danger">{{ $message }}</p>
+                    @enderror
+
                     <p>Giá: <strong>{{ number_format($product->price, 0, '.', '.') }} VNĐ</strong> </p>
 
                     <div class="wrapper-btn">

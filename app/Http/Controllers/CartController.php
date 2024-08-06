@@ -6,11 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Cart_detail;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CartDetailRequest;
 
 class CartController extends Controller
 {
     // Thêm sản phẩm
     public function addToCart(Request $request){
+        $request->validate([
+            'quantity'=> 'required|integer|max:100|min:1'
+        ],[
+            'quantity.required' => 'Số lượng đang không có',
+            'quantity.min' => 'Số lượng tối thiểu là 1',
+            'quantity.max' => 'Số lượng tối đa là 100',
+            'quantity.integer' => 'Số lượng phải là một số nguyên'
+        ]);
         $check = Cart::where('user_id', Auth::id());
         if ($check->exists()) {
             $cart = Cart::first();
@@ -23,6 +32,7 @@ class CartController extends Controller
                     ]
                 );
             } else {
+                $cart = Cart::first();
                 $data = [
                     'cart_id' => $cart->id,
                     'product_id' => $request->idProduct,
@@ -58,15 +68,7 @@ class CartController extends Controller
         ]);
     }
 
-    public function updateCart(Request $request){
-        $request->validate([
-            'quantity.*'=> 'required|integer|max:100|min:1'
-        ],[
-            'quantity.*.required' => 'Số lượng đang không có',
-            'quantity.*.min' => 'Số lượng tối thiểu là 1',
-            'quantity.*.max' => 'Số lượng tối đa là 100',
-            'quantity.*.integer' => 'Số lượng phải là một số nguyên'
-        ]);
+    public function updateCart(CartDetailRequest $request){
         foreach ($request->idCartDetail as $key => $value){
             Cart_detail::where('id', $value)->update([
                 'quantity' => $request->quantity[$key]

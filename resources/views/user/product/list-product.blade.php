@@ -34,7 +34,7 @@
     <div class="prds-home ms-5 me-5">
         <div class="heading-products mb-2">
           <span class="fs-2"><a href="{{route('user.homeProducts')}}">Trang chủ |</a></span>
-          <span class="fs-5">Trang sản phẩm</span>
+          <span class="fs-5"><a href="{{route('user.product.listProductsUser')}}">Trang sản phẩm</a></span>
 
         </div>
         <div class="row">

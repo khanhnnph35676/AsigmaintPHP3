@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Cart_detail;
-
+use Illuminate\Support\Facades\Auth;
 class ProuductController extends Controller
 {
 
@@ -19,7 +19,8 @@ class ProuductController extends Controller
             'cart_details.product:id,name,price,description,category_id',
             'cart_details.product.category:id,name',
             'cart_details.product.images:image_id,image_url,image_type'
-        ])->first();
+        ])
+        ->first();
         $listProduct = Product::with(['category:id,name', 'images:image_id,image_url,image_type'])->paginate(5);
         return view('user.home')->with([
             'listProduct' => $listProduct,
@@ -67,7 +68,7 @@ class ProuductController extends Controller
         ])->first();
         $product = Product::with(['images:image_id,image_url,image_type', 'category:id,name','cart_detail:id,cart_id,product_id,quantity'])
         ->find($idProduct);
-        // dd($product);
+        // dd($cart->user_id);
         return view('user.product.detail-product')->with([
             'product' => $product,
             'cart'=>$cart

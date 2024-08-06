@@ -52,26 +52,39 @@
                             <td> {{ number_format($value->product->price, 0, '.', '.') . ' VNĐ' }} </td>
                             <td>@php echo number_format($thanhTien, 0, '.', '.') .' VNĐ' @endphp </td>
                             <td>
+                                {{-- thanh toán --}}
+                                <a href="" class="btn btn border">
+                                    <i class="fa-solid fa-cart-arrow-down fa-lg" style="color: #000000;"></i>
+                                </a>
                                 {{-- sửa --}}
-                                <button type="submit" class="btn btn border"><i class="fa-regular fa-pen-to-square fa-xl"
-                                        style="color: #000000;"></i></button>
+                                <button type="submit" class="btn btn border">
+                                    <i class="fa-regular fa-pen-to-square fa-xl" style="color: #000000;"></i>
+                                </button>
                                 {{-- xoá --}}
-                                <a href="" class="btn btn border"><i class="fa-regular fa-trash-can fa-xl"
-                                    data-bs-target="#deleteCart" data-bs-id="{{ $value->id }}" style="color: #000000;"></i></a>
+                                <a class="btn btn border"><i class="fa-regular fa-trash-can fa-xl"
+                                  data-bs-toggle="modal" data-bs-target="#deleteCart" data-bs-id="{{ $value->id }}" style="color: #000000;"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
                     <tr>
                         <td colspan="3"></td>
-                        <td> @error('quantity.*')
+                        <td>
+                            @error('quantity.*')
                             <span class="text-danger">{{ $message }}</span>
-                        @enderror</td>
+                            @enderror
+                        </td>
+                        <td></td>
                         <td>Tổng tiền: @php echo number_format($tongTien, 0, '.', '.') .' VNĐ'  @endphp</td>
+                        <td> <a href="#" class="btn btn-dark">Thanh toán</a></td>
                     </tr>
                 </tbody>
+
             </table>
         </form>
+        <div class="wrapper-btn text-end"><a href="{{route('user.product.listProductsUser')}}" class="btn btn-danger">Trở lại trang mua hàng</a></div>
     </div>
+
     {{-- delete modal --}}
     <div class="modal fade" id="deleteCart" tabindex="-1" aria-labelledby="#deleteCartModel" aria-hidden="true">
         <div class="modal-dialog">
@@ -103,7 +116,7 @@
         var button = event.relatedTarget
         var id = button.getAttribute('data-bs-id')
         let formDelete = document.getElementById('formDeleteCart')
-        formDelete.setAttribute('action','{{ route("admin.products.deleteProduct") }}?idCartDetail=' + id)
+        formDelete.setAttribute('action','{{ route("user.deleteCart") }}?idCartDetail=' + id)
     })
     </script>
 @endpush
