@@ -1,0 +1,17 @@
+#login-admin{
+    width: 600px;
+}
+
+.wrapper-login-admin{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 37%;
+    top: 20%;
+}
+
+.wrapper-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

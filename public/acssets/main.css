@@ -1,0 +1,440 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --color-primary: linear-gradient(to bottom,#000000cd, #0c0c0cc7, #131212c8);
+    --color-secondary: rgb(222, 222, 222);
+    --color-primarylight: linear-gradient(to bottom,#f4eadc9a, #ebe5c8, #ebe5cbec,#ebe5cb);
+}
+
+body {
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color-secondary);
+}
+body {
+    background: var(--color-primary);
+}
+
+
+
+
+
+/* cài đặt màu */
+.edit-bg-color{
+    background: #11111131;
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    z-index: 11111;
+}
+
+#edit-color{
+    margin-right: 60px;
+    margin-bottom: 15px;
+    position: fixed;
+    right: 0;
+    bottom: 50%;
+    z-index: 11111;
+}
+
+.box-dark{
+    background: black;
+    width:30px;
+    height: 30px;
+    border-radius:2px;
+}
+
+.box-white{
+    background: rgb(252, 251, 251);
+    width:30px;
+    height: 30px;
+    border-radius:2px;
+}
+
+.wrapper-box{
+    display: flex;
+    gap:10px;
+}
+
+a{
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+/* Định nghĩa keyframe animation */
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Áp dụng animation và style khác cho icon */
+
+.install-color {
+    cursor: pointer;
+    color: #68676a; /* Màu sắc icon */
+    animation: spin infinite 3s linear; /* Chạy vô hạn, 3 giây mỗi vòng, tuyến tính */
+  }
+
+/* -------------------------Header ---------------------- */
+.fa-lg{
+    color: var(--color-secondary);
+}
+
+.wrapper-acount{
+    color: var(--color-secondary);
+}
+
+.header{
+    position: fixed !important;
+    right: 0;
+    width: 84%;
+    box-shadow: 0 0 10px rgba(30, 30, 30, 0.5); /* Tạo hiệu ứng đổ bóng khi focus */
+    align-items: center !important;
+    z-index: 1111;
+    background: rgb(40, 39, 39);
+    color: white;
+}
+
+.custom-input{
+    background: rgba(0, 0, 0, 0.18);
+    border: none;
+}
+
+.custom-input::placeholder{
+    color: #dedede;
+}
+
+.custom-input:focus {
+    border: none;
+    border-color:var(--color-primary); /* Màu viền khi focus */
+    box-shadow: 0 0 15px rgba(194, 189, 189, 0.5);
+    color: var(--color-secondary);
+    background: var(--color-primary);
+    border: 5px solid rgba(243, 241, 241, 0.295);
+}
+
+.wrapper-input{
+    position: relative;
+}
+
+.search{
+    border: none;
+    background: transparent !important;
+    position: absolute;
+    right: 4%;
+    top: 20%;
+}
+
+.search:hover i{
+    color:rgba(255, 0, 0, 0.5); /* Tạo hiệu ứng đổ bóng khi focus */
+}
+
+
+.wrapper-img-acount{
+    width: 49px;
+    height: 49px;
+    border-radius: 50%;
+    border: 1px solid #dedede;
+}
+
+.mes{
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper-mes{
+    position: relative;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.mes span{
+    position: absolute;
+    margin-left: 10px;
+    top: 0%;
+    width: 13px;
+    height: 13px;
+    background: rgba(238, 3, 3, 0.851);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:50%;
+    font-size: 10px;
+}
+
+.acount p button{
+    border: none !important;
+    background: inherit;
+}
+
+.polygon{
+    position: absolute !important;
+    top:0%;
+    left: 65%;
+    margin-top: -30px;
+}
+.card{
+    background: rgba(0, 0, 0, 0.554);
+    color: var(--color-secondary);
+    position: relative;
+    margin-top: 10px;
+}
+
+#collapseExample{
+    position: absolute;
+    top: 89%;
+    right:3%;
+    width: 140px;
+}
+
+.information ul li{
+    display: inline-block;
+    cursor: pointer;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.img{
+    border-radius: 50%;
+}
+/* ----------------left bar --------------------*/
+.main-content{
+    display: flex;
+}
+
+.left{
+    height: 100vh;
+}
+
+.left-bar{
+    border: none !important;
+   position: fixed;
+   background: rgba(0, 0, 0, 0.543);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Thiết lập độ dày của thanh cuộn */
+    scrollbar-color: #888 #333;
+    height:100%;
+    z-index: 1111;
+}
+
+.left-bar::-webkit-scrollbar {
+    width: 8px; /* Chiều rộng thanh cuộn */
+    height: 8px; /* Chiều cao thanh cuộn khi scroll theo chiều dọc */
+}
+
+.left-bar::-webkit-scrollbar-thumb {
+    background-color: #333; /* Màu nền của thanh cuộn */
+    border-radius: 4px; /* Bo tròn cạnh của thanh cuộn */
+}
+
+.left-bar::-webkit-scrollbar-track {
+    background-color: #888; /* Màu nền của phần track (phần nền không có nội dung thanh cuộn) */
+    border-radius: 4px; /* Bo tròn cạnh của phần track */
+}
+
+.menu{
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.menu:hover{
+    background: rgb(73, 73, 73);
+}
+
+.menu-content{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease, opacity 0.2s ease;
+}
+
+.menu-content li{
+    display: inline-block;
+    width: 100%;
+    margin-left: -12px;
+}
+
+.menu-content.show {
+    max-height: 500px; /* Giá trị đủ lớn để chứa nội dung */
+    opacity: 1;
+}
+
+.menu-content li:hover{
+    background: rgb(73, 73, 73);
+    cursor: pointer;
+}
+
+.round{
+    border: 1px solid #dedede;
+    width: 5px;
+    height: 5px;
+    background: #dedede;
+    border-radius: 50%;
+}
+
+.rotate {
+    transition: transform 0.5s ease;
+}
+
+.rotate.rotate-270 {
+    transform: rotate(270deg);
+}
+
+/*----------------------- content-bar ----------------*/
+.content-bar{
+    margin-top: 100px;
+    padding-left: 14px;
+    height: 100%;
+}
+
+.radius{
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.213);
+    position: relative;
+}
+
+.radius span{
+    font-size: 14px;
+}
+
+.width49pt{
+    width: 49%;
+}
+
+.width65pt{
+    width: 65%;
+}
+
+.width33pt{
+    width: 33%;
+}
+
+.width30pt{
+    width: 30%;
+}
+.width35pt{
+    width: 35%;
+}
+
+.image-prd{
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.438);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prd-line{
+    border: 1px solid rgba(255, 255, 255, 0.278);
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.213);
+}
+
+.prd-line:hover{
+   margin: 1px;
+    background:rgba(255, 255, 255, 0.128) ;
+}
+
+.list-prd{
+    height: 320px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Thiết lập độ dày của thanh cuộn */
+    scrollbar-color: #888 #333;
+}
+
+.list-prd::-webkit-scrollbar {
+    width: 3px; /* Chiều rộng thanh cuộn */
+    height: 3px; /* Chiều cao thanh cuộn khi scroll theo chiều dọc */
+}
+
+.list-prd::-webkit-scrollbar-thumb {
+    background-color: #333; /* Màu nền của thanh cuộn */
+    border-radius: 1px; /* Bo tròn cạnh của thanh cuộn */
+}
+
+.list-prd::-webkit-scrollbar-track {
+    background-color: #888; /* Màu nền của phần track (phần nền không có nội dung thanh cuộn) */
+    border-radius: 1zpx; /* Bo tròn cạnh của phần track */
+}
+
+.name-user{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+
+.wrapper-img-acount img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.wrapper-name span{
+    font-weight: 300px;
+    font-size: 10px;
+    text-align: left;
+}
+
+.wrapper-table{
+    border: 1px solid rgb(144, 137, 137);
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.form-search input{
+    width: 165px;
+    height: 30px;
+    background: var(--color-primary);
+}
+
+.form-search input:focus{
+    background: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.form-search{
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-form{
+    display: flex;
+    justify-content: space-around;
+}
+
+/* -----------------------trang dăng nhập-------------------- */
+
+
+/*------------Trang thêm sản phẩm --------------- */
+
+
+/* -------------trang danh mục---------------------- */
+.add-caegory,.list-categories{
+    border: 1px solid black;
+    border-radius: 10px;
+}
